@@ -11,7 +11,6 @@ const MakeabidModal = ({ showModal, id }) => {
 			amount: price,
 		};
 		const res = await createBid(payload);
-		console.log(res);
 		showModal(true);
 		toast.success('Bid created successfully.', {
 			position: 'bottom-right',
