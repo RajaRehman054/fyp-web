@@ -156,3 +156,12 @@ export const createJob = async (data) => {
   const response = await axiosClient.post(`api/job/create`, data);
   return response.data;
 };
+
+export const payment = async (payload) => {
+  try {
+    const response = await axiosClient.post(`payment/intent/${payload}`);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
