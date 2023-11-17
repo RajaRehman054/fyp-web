@@ -1,25 +1,13 @@
-import React from "react";
-import { IoHeart, IoChatbubble, IoDownload } from "react-icons/io5";
-import { format } from "timeago.js";
+import { IoHeart, IoChatbubble, IoEllipsisHorizontal } from "react-icons/io5";
 import { HOSTNAME } from "../../../Config";
-import MakeabidModal from "./MakeabidModal";
-import { ToastContainer } from "react-toastify";
+import { format } from "timeago.js";
+import UserOne from "../../assets/img1.png";
 
-const Trending = ({ videos }) => {
-  const handleModal = async (checker) => {
-    if (checker?.bubbles === true) {
-      return document.getElementById("my_modal_3").showModal();
-    }
-    document.getElementById("my_modal_3").close();
-  };
-
+const OtherProfileVideos = ({ data }) => {
   return (
     <>
-      {videos.map((element, index) => (
-        <div
-          key={index}
-          className="card card-compact mb-[22px] w-[85%] bg-white shadow-xl"
-        >
+      {data.map((element) => (
+        <div className="card card-compact mb-[22px] w-[85%] bg-white shadow-xl">
           <video
             className="h-[300px] w-full rounded-xl  bg-[white] "
             controls
@@ -38,14 +26,18 @@ const Trending = ({ videos }) => {
               <div className="avatar items-center">
                 <div className="w-[50px] rounded-full">
                   <img
-                    src={`${HOSTNAME}users/picture?path=${element.owner.picture}`}
+                    src={
+                      element.owner.picture
+                        ? `${HOSTNAME}users/picture?path=${element.owner.picture}`
+                        : UserOne
+                    }
                   />
                 </div>
               </div>
 
               <div className="mr-[auto]  px-5">
                 <p className="text-[14px] font-bold text-[black] ">
-                  {element.name}
+                  {data.name}
                   <span className="ml-[10px] text-[12px] text-[black]">
                     {element.owner.username}
                   </span>
@@ -54,8 +46,12 @@ const Trending = ({ videos }) => {
                   {format(element.created_on)}
                 </p>
               </div>
+
+              <div className="ml-[auto] cursor-pointer">
+                <IoEllipsisHorizontal size={30} color="#939393" />
+              </div>
             </div>
-            <p className="font-semibold">{element.description}</p>
+            <p className="font-semibold">{element.descp}</p>
             <p className="font-semibold text-[#FF8216]">{element.tags}</p>
             <div className="card-actions items-center justify-between">
               <div className="my-2 flex items-center">
@@ -69,19 +65,13 @@ const Trending = ({ videos }) => {
                 </div>
               </div>
 
-              <div className="my-2 flex cursor-pointer items-center  ">
-                <div className="mr-2 flex flex-row" onClick={handleModal}>
-                  <IoDownload size={24} color="#939393" />
-                </div>
-              </div>
+              <div className="my-2 flex cursor-pointer items-center  "></div>
             </div>
           </div>
-          <MakeabidModal showModal={handleModal} id={element._id} />
         </div>
       ))}
-      <ToastContainer />
     </>
   );
 };
 
-export default Trending;
+export default OtherProfileVideos;

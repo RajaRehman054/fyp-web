@@ -8,6 +8,7 @@ import NewsFeed from "./screens/MainScreens/NewsFeed";
 import TrendingBids from "./screens/SecondaryScreens/TrendingBids";
 import ActiveBids from "./screens/SecondaryScreens/ActiveBids";
 import ContentDetails from "./screens/SecondaryScreens/ContentDetails";
+import Search from "./screens/MainScreens/Search";
 import JobDetails from "./screens/SecondaryScreens/JobDetails";
 import MyProfile from "./screens/SecondaryScreens/MyProfile";
 import OthersProfile from "./screens/SecondaryScreens/OthersProfile";
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
           {
             path: "/otherProfile",
             element: <OthersProfile />,
+          },
+          {
+            path: "/search",
+            element: <Search />,
           },
           {
             path: "/JobPost",

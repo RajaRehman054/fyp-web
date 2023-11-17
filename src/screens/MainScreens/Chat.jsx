@@ -124,7 +124,7 @@ const Chat = () => {
 
           {conversations.length > 0 ? (
             conversations.map((c) => (
-              <div onClick={() => setCurrentChat(c)}>
+              <div key={c._id} onClick={() => setCurrentChat(c)}>
                 <Conversation key={c._id} conversation={c} currentUser={user} />
               </div>
             ))
@@ -157,9 +157,13 @@ const Chat = () => {
               </div>
               {/*chat box area */}
               <div className="max-h-[320px] overflow-y-auto">
-                {messages.map((m) => (
-                  <div ref={scrollRef}>
-                    <Message message={m} own={m.sender === user._id} />
+                {messages.map((m, index) => (
+                  <div key={index} ref={scrollRef}>
+                    <Message
+                      key={index}
+                      message={m}
+                      own={m.sender === user._id}
+                    />
                   </div>
                 ))}
               </div>
