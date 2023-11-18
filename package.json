@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "autoprefixer": "^10.4.16",
     "axios": "^1.4.0",
+    "js-file-download": "^0.4.12",
     "react": "^18.2.0",
     "react-avatar-edit": "^1.2.0",
     "react-dom": "^18.2.0",
