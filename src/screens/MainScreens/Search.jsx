@@ -4,12 +4,14 @@ import OtherProfileVideos from "../../Components/NewsFeedComponent/OtherProfileV
 import { getVideosApi } from "../../api/Api";
 import Loader from "../../Components/Loader/Loader";
 import UserOne from "../../assets/Search.jpg";
+import UserTwo from "../../assets/noresults.png";
 
 const Search = () => {
   const [search, setSearch] = useState("");
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [isSearchPressed, setIsSearchPressed] = useState(false);
 
   const fetchData = async () => {
     setLoading(true);
@@ -25,6 +27,11 @@ const Search = () => {
   const handleInputChange = (e) => {
     setSearch(e.target.value);
     setIsTyping(e.target.value !== "");
+  };
+
+  const handleSearchPress = () => {
+    setIsTyping(false);
+    setIsSearchPressed(true);
   };
 
   if (loading) {
@@ -98,6 +105,7 @@ const Search = () => {
                       boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
                       transition: "0.3s",
                     }}
+                    onClick={handleSearchPress}
                   >
                     Search
                   </button>
@@ -107,20 +115,28 @@ const Search = () => {
           </div>
 
           {/*Search Results  */}
-          <div className="relative my-[22px] flex w-full flex-col items-center">
-            {isTyping && (
+
+          {isTyping && (
+            <div className="relative my-[22px] flex w-full flex-col items-center">
               <div className="rounded-full items-center bg-white shadow-xl p-3 ">
                 <span className="loading loading-infinity loading-lg text-[#FF8216]"></span>
               </div>
-            )}
-            {videos !== null ? (
-              <div className="rounded-full items-center bg-white shadow-xl p-3 ">
-                No result
-              </div>
-            ) : (
-              <OtherProfileVideos data={videos} />
-            )}
-          </div>
+            </div>
+          )}
+
+          {/*Results div*/}
+          {isSearchPressed && (
+            <div className="relative my-[22px] flex w-full flex-col items-center">
+              {videos === null ? (
+                <div
+                  className="bg-cover w-[400px] bg-center h-[300px] rounded-xl relative "
+                  style={{ backgroundImage: `url(${UserTwo})` }}
+                ></div>
+              ) : (
+                <OtherProfileVideos data={videos} />
+              )}
+            </div>
+          )}
         </div>
 
         {/* Second Column View */}

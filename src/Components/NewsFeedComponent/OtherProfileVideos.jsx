@@ -6,8 +6,11 @@ import UserOne from "../../assets/img1.png";
 const OtherProfileVideos = ({ data }) => {
   return (
     <>
-      {data.map((element) => (
-        <div className="card card-compact mb-[22px] w-[85%] bg-white shadow-xl">
+      {data.map((element, index) => (
+        <div
+          key={index}
+          className="card card-compact mb-[22px] w-[85%] bg-white shadow-xl"
+        >
           <video
             className="h-[300px] w-full rounded-xl  bg-[white] "
             controls

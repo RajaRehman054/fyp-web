@@ -3,7 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { editUser, changePass } from "../../api/Api";
 import { setUser } from "../../redux/userSlice";
-
+import UserOne from "../../assets/help.png";
+import {
+  IoCall,
+  IoLocation,
+  IoMail,
+  IoPhoneLandscape,
+  IoSearch,
+  IoTelescope,
+} from "react-icons/io5";
 const Settings = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -160,7 +168,7 @@ const Settings = () => {
       case 1:
         return (
           <div>
-            <p className="text-[20px] font-bold">Edit Profile</p>
+            <p className="text-[20px] font-bold">Edit Password</p>
             <div className="flex flex-row items-center my-[20px]">
               <div className="w-[20%]">
                 <p className="text-[14px] font-bold ">Old Password</p>
@@ -211,12 +219,95 @@ const Settings = () => {
             </div>
           </div>
         );
-      case 2:
-        return <h1>hi</h1>;
       case 3:
-        return <h1>hi</h1>;
+        return (
+          <div>
+            <p className="text-[20px] font-bold">Edit Notifications</p>
+
+            <div className="flex flex-row items-center my-[20px] h-[60px]">
+              <div className="w-[30%]">
+                <p className="text-[14px] font-bold ">Allow Notifications</p>
+              </div>
+              <input
+                type="checkbox"
+                className="toggle toggle-success ml-auto mr-[20px] "
+              />
+            </div>
+            <div className="flex flex-row items-center my-[20px] h-[60px]">
+              <div className="w-[30%]">
+                <p className="text-[14px] font-bold ">Allow Bidding Updates</p>
+              </div>
+              <input
+                type="checkbox"
+                className="toggle toggle-success ml-auto mr-[20px]"
+              />
+            </div>
+            <div className="flex flex-row items-center my-[20px] h-[60px]">
+              <div className="w-[30%]">
+                <p className="text-[14px] font-bold ">Allow Payment Updates</p>
+              </div>
+              <input
+                type="checkbox"
+                className="toggle toggle-success ml-auto mr-[20px]"
+              />
+            </div>
+            <div className=" flex flex-row  my-[20px] items-center justify-end">
+              <button
+                className="mx-[10px] h-[22px] w-[100px] justify-center rounded-[10px] bg-[#FF8216]  text-[15px]  text-white hover:bg-[#F7A541] active:bg-[#FFD583] sm:h-[35px] sm:w-[100px]"
+                style={{ transition: "0.3s" }}
+                onClick={handlePassword}
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        );
       case 4:
-        return <h1>hi</h1>;
+        return (
+          <div>
+            <div
+              className="bg-cover bg-center h-[550px] relative "
+              style={{ backgroundImage: `url(${UserOne})` }}
+            >
+              <div className="absolute inset-0 bg-[black] bg-opacity-50 rounded-xl"></div>
+
+              <div className="flex items-center flex-col justify-center relative z-10 h-[33%] ">
+                <p className="font-[semibold] text-[50px] text-[white]">
+                  How can we Help you?
+                </p>
+                <p className="font-[semibold] text-[20px] text-[white]">
+                  we'll love to talk about how we can work together
+                </p>
+              </div>
+
+              <div className=" flex items-center justify-around flex-row  justify-between relative z-10 h-[33%] ">
+                <div className="card w-[30%] bg-white  ">
+                  <div className="card-body items-center justify-center">
+                    <IoMail size={30} color="#FF8216" />
+                    <h2 className="card-title">Email</h2>
+                    <p>newswave@gmail.com</p>
+                  </div>
+                </div>
+                <div className="card w-[30%] bg-white  ">
+                  <div className="card-body items-center justify-center">
+                    <IoCall size={30} color="#FF8216" />
+                    <h2 className="card-title">Phone Number</h2>
+                    <p>051-5212723</p>
+                  </div>
+                </div>
+              </div>
+              <div className=" flex items-center justify-center flex-row  justify-center relative z-10 h-[33%]">
+                <div className="card w-[30%] bg-white  ">
+                  <div className="card-body items-center justify-center">
+                    <IoLocation size={30} color="#FF8216" />
+                    <h2 className="card-title">Main Office</h2>
+                    <p>Comsats Islamabad</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
     }
   };
 
