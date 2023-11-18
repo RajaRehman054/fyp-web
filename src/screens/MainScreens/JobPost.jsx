@@ -95,7 +95,7 @@ const JobPost = () => {
 
           {/* Jobs View */}
           {jobs.length === 0 ? (
-            <div className="relative my-[22px] flex w-full flex-row h-64 rounded-xl bg-white p-4 shadow-xl">
+            <div className="relative my-[22px] flex w-full flex-row h-30 rounded-xl bg-white p-4 shadow-xl">
               <div
                 className=" w-full items-center p-4 rounded-xl relative"
                 style={{
@@ -108,7 +108,7 @@ const JobPost = () => {
 
                 <div className="text-center relative z-10">
                   <p className="font-[semibold] text-[50px] text-[white] my-5">
-                    No Job Posts yet!!!
+                    No Job Post Yet!!!
                   </p>
                 </div>
               </div>

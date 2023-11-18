@@ -185,7 +185,7 @@ const MyProfileVideos = ({ data }) => {
                 >
                   <IoStarHalf size={24} color="#939393" />
                 </div>
-                <div className="lg:tooltip mr-5" data-tip="360°">
+                <div className="lg:tooltip mr-5" data-tip="90°">
                   <IoReloadCircle
                     size={24}
                     color="#939393"
