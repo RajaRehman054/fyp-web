@@ -106,7 +106,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <NavLink
                   to="/search"
                   className={`group relative flex items-center gap-2.5 rounded-[10px] px-4 py-2 text-[17px] font-medium duration-300 ease-in-out hover:bg-hover hover:text-[#FF8216] ${
-                    pathname.includes("user")
+                    pathname.includes("search")
                       ? "bg-hover text-[#FF8216]"
                       : "text-text"
                   }`}
@@ -122,7 +122,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <NavLink
                   to="/JobPost"
                   className={`group relative flex items-center gap-2.5 rounded-[10px] px-4 py-2 text-[17px] font-medium duration-300 ease-in-out hover:bg-hover hover:text-[#FF8216] ${
-                    pathname.includes("user")
+                    pathname.includes("JobPost")
                       ? "bg-hover text-[#FF8216]"
                       : "text-text"
                   }`}
@@ -138,7 +138,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <NavLink
                   to="/bids"
                   className={`group relative flex items-center gap-2.5 rounded-[10px] px-4 py-2 text-[17px] font-medium duration-300 ease-in-out hover:bg-hover hover:text-[#FF8216] ${
-                    pathname.includes("restaurant")
+                    pathname.includes("bids")
                       ? "bg-hover text-[#FF8216]"
                       : "text-text"
                   }`}
@@ -154,7 +154,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <NavLink
                   to="/chat"
                   className={`group relative flex items-center gap-2.5 rounded-[10px] px-4 py-2 text-[17px] font-medium duration-300 ease-in-out hover:bg-hover hover:text-[#FF8216] ${
-                    pathname.includes("stats")
+                    pathname.includes("chat")
                       ? "bg-hover text-[#FF8216]"
                       : "text-text"
                   }`}
@@ -170,7 +170,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <NavLink
                   to="/payment"
                   className={`group relative flex items-center gap-2.5 rounded-[10px] px-4 py-2 text-[17px] font-medium duration-300 ease-in-out hover:bg-hover hover:text-[#FF8216] ${
-                    pathname.includes("reports")
+                    pathname.includes("payment")
                       ? "bg-hover text-[#FF8216]"
                       : "text-text"
                   }`}
@@ -185,8 +185,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <NavLink
                   to="/settings"
-                  className={`group relative flex items-center gap-2.5 rounded-[10px] px-4 py-2 text-[17px] font-medium text-text duration-300 ease-in-out hover:bg-hover hover:text-[#FF8216] ${
-                    pathname.includes("settings") && "bg-hover text-[#FF8216]"
+                  className={`group relative flex items-center gap-2.5 rounded-[10px] px-4 py-2 text-[17px] font-medium duration-300 ease-in-out hover:bg-hover hover:text-[#FF8216] ${
+                    pathname.includes("settings")
+                      ? "bg-hover text-[#FF8216]"
+                      : "text-text"
                   }`}
                 >
                   <IoSettingsOutline size={24} color="currentColor" />

@@ -5,13 +5,13 @@ import React, { useState, useEffect } from "react";
 }
 import ForYou from "../../Components/JobPostcomp/ForYou";
 import YourJobs from "../../Components/JobPostcomp/YourJobs";
-import PostedByYou from "../../Components/JobPostcomp/PostedByYou";
 import CreateNewJobModal from "../../Components/JobPostcomp/CreateNewJobModal";
 import SideTable from "../../Components/JobPostcomp/SideTable";
 import Heading from "../../Components/Heading";
 import { getFeedData, getJobs } from "../../api/Api";
 import Loader from "../../Components/Loader/Loader";
 import { ToastContainer } from "react-toastify";
+import UserOne from "../../assets/jobpost.png";
 
 const handleModal = async (checker) => {
   if (checker?.bubbles === true) {
@@ -36,8 +36,6 @@ const JobPost = () => {
         return <ForYou data={jobs} />;
       case 1:
         return <YourJobs data={jobs} />;
-      case 2:
-        return <PostedByYou data={jobs} />;
     }
   };
 
@@ -96,9 +94,30 @@ const JobPost = () => {
           </div>
 
           {/* Jobs View */}
-          <div className="relative my-[22px] flex w-full flex-col items-center rounded-xl bg-white p-4 shadow-xl">
-            {renderActiveComponent()}
-          </div>
+          {jobs.length === 0 ? (
+            <div className="relative my-[22px] flex w-full flex-row h-64 rounded-xl bg-white p-4 shadow-xl">
+              <div
+                className=" w-full items-center p-4 rounded-xl relative"
+                style={{
+                  backgroundImage: `url(${UserOne})`,
+                  backgroundSize: "contain", // Ensure the background image covers the entire container
+                }}
+              >
+                {/* Opacity overlay div */}
+                <div className="absolute inset-0 bg-[black] bg-opacity-50 rounded-xl"></div>
+
+                <div className="text-center relative z-10">
+                  <p className="font-[semibold] text-[50px] text-[white] my-5">
+                    No Job Posts yet!!!
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="relative my-[22px] flex w-full flex-col items-center rounded-xl bg-white p-4 shadow-xl">
+              {renderActiveComponent()}
+            </div>
+          )}
         </div>
 
         {/* Second Column View */}

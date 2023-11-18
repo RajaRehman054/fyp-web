@@ -70,7 +70,11 @@ const Trending = ({ videos }) => {
               </div>
 
               <div className="my-2 flex cursor-pointer items-center  ">
-                <div className="mr-2 flex flex-row" onClick={handleModal}>
+                <div
+                  className="lg:tooltip mr-2"
+                  data-tip="Make a Bid"
+                  onClick={handleModal}
+                >
                   <IoDownload size={24} color="#939393" />
                 </div>
               </div>

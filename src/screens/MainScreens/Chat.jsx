@@ -7,6 +7,7 @@ import Conversation from "../../Components/chatComp/Conversation";
 import axiosClient from "../../../axiosClient";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
+import { HOSTNAME } from "../../../Config";
 
 const Chat = () => {
   const { user } = useSelector((state) => state.user);
@@ -15,6 +16,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [currentChatUser, setCurrentChatUser] = useState("");
   const socket = useRef();
   const scrollRef = useRef();
 
@@ -38,6 +40,18 @@ const Chat = () => {
   useEffect(() => {
     socket.current.emit("addUser", user._id);
   }, [user]);
+
+  //get user of current chat
+  const getUser = async (c) => {
+    setCurrentChat(c);
+    var datamember = c.members.find((m) => m !== user._id);
+    try {
+      const res = await axiosClient.get("/users?userId=" + datamember);
+      setCurrentChatUser(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // get converstions of the current user
   useEffect(() => {
@@ -115,7 +129,7 @@ const Chat = () => {
         <div className="hidden w-full sm:block sm:w-[30%] border-r-[2px] border-gray">
           <div className="flex border-b-[2px] border-b-gray items-center">
             <h1 className="text-[16px] font-bold p-3 ml-auto text-[black] ">
-              Lexi030
+              {user.username}
             </h1>
             <span className="cursor-pointer ml-auto mr-3">
               <BiMessageSquareEdit size={24} color="black" />
@@ -124,7 +138,7 @@ const Chat = () => {
 
           {conversations.length > 0 ? (
             conversations.map((c) => (
-              <div key={c._id} onClick={() => setCurrentChat(c)}>
+              <div key={c._id} onClick={() => getUser(c)}>
                 <Conversation key={c._id} conversation={c} currentUser={user} />
               </div>
             ))
@@ -142,13 +156,17 @@ const Chat = () => {
               {/*Upper header */}
               <div className="flex border-b-[2px] border-b-gray items-center px-3">
                 <img
-                  src={UserOne}
+                  src={
+                    currentChatUser.picture === null
+                      ? UserOne
+                      : `${HOSTNAME}users/picture?path=${currentChatUser.picture}`
+                  }
                   alt="User"
                   className="w-[40px] h-[40px] rounded-full mr-[20px]"
                 />
                 <span>
                   <h1 className="text-[16px] text-[black] font-bold  p-3 ">
-                    Lexi030
+                    {currentChatUser.username}
                   </h1>
                 </span>
                 <span className="ml-auto cursor-pointer">
@@ -163,6 +181,7 @@ const Chat = () => {
                       key={index}
                       message={m}
                       own={m.sender === user._id}
+                      currentuser={currentChatUser}
                     />
                   </div>
                 ))}
