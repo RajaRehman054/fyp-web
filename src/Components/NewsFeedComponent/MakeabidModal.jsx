@@ -1,16 +1,40 @@
 import React, { useState } from 'react';
 import { createBid } from '../../api/Api';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/userSlice.js';
+import { getUser } from '../../api/Api.js';
 
 const MakeabidModal = ({ showModal, id }) => {
+	const dispatch = useDispatch();
 	const [checked, setChecked] = useState(false);
+	const { user } = useSelector(state => state.user);
 	const [price, setPrice] = useState(1);
+	const fetchUsers = async () => {
+		const data = await getUser();
+		dispatch(setUser(data.user));
+	};
 	const createBidHandler = async () => {
 		let payload = {
 			video: id,
 			amount: price,
 		};
-		const res = await createBid(payload);
+		if (user.wallet < price) {
+			showModal(true);
+			return toast.error(`Not enough balance!`, {
+				position: 'bottom-right',
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+			});
+		}
+		await createBid(payload);
+		fetchUsers();
 		showModal(true);
 		toast.success('Bid created successfully.', {
 			position: 'bottom-right',
