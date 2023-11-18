@@ -34,7 +34,7 @@ const MakeabidModal = ({ showModal, id }) => {
 			});
 		}
 		await createBid(payload);
-		fetchUsers();
+		await fetchUsers();
 		showModal(true);
 		toast.success('Bid created successfully.', {
 			position: 'bottom-right',

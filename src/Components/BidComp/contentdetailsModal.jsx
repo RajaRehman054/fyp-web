@@ -6,6 +6,7 @@ import { getUser } from '../../api/Api.js';
 import { setUser } from '../../redux/userSlice.js';
 
 const contentdetailsModal = props => {
+	const dispatch = useDispatch();
 	const { data, handleModal } = props;
 	const [amount, setAmount] = useState(data.current_amount + 1);
 	const { user } = useSelector(state => state.user);
@@ -42,7 +43,7 @@ const contentdetailsModal = props => {
 				theme: 'dark',
 			});
 		}
-		fetchUsers();
+		await fetchUsers();
 		handleModal(true);
 		toast.success('Bid added successfully.', {
 			position: 'bottom-right',
