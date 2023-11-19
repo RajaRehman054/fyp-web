@@ -155,11 +155,43 @@ export const getJobs = async () => {
 	return response.data;
 };
 
+export const getPastJobs = async () => {
+	const response = await axiosClient.get(`api/jobs/past`);
+	return response.data;
+};
+
 export const createJob = async data => {
 	const response = await axiosClient.post(`api/job/create`, data);
 	return response.data;
 };
 
+export const stopRequests = async id => {
+	const response = await axiosClient.patch(`api/job/update/${id}`);
+	return response.data;
+};
+
+export const acceptRejectRequests = async (reject, id, sid) => {
+	if (reject) {
+		const response = await axiosClient.patch(
+			`api/job/accept/${id}/${sid}?reject=true`
+		);
+		return response.data;
+	} else {
+		const response = await axiosClient.patch(`api/job/accept/${id}/${sid}`);
+		return response.data;
+	}
+};
+
+export const deleteJob = async id => {
+	try {
+		const response = await axiosClient.delete(`api/job/delete/${id}`);
+		return response.data;
+	} catch (error) {
+		return error.response.data;
+	}
+};
+
+//TODO : payment
 export const payment = async payload => {
 	try {
 		const response = await axiosClient.post(`payment/intent/${payload}`);

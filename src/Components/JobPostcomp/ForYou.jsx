@@ -32,7 +32,7 @@ const ForYou = ({ data }) => {
 							style={{ transition: '0.3s' }}
 							onClick={() =>
 								navigate(`/JobDetails`, {
-									state: element,
+									state: { ...element, past: false },
 								})
 							}>
 							Go
