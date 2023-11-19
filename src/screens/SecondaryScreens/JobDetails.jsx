@@ -17,7 +17,20 @@ const JobDetails = ({}) => {
 		setReceiving(prev => !prev);
 	};
 	const acceptRequest = async (id, sid) => {
-		await acceptRejectRequests(false, id, sid);
+		const res = await acceptRejectRequests(false, id, sid);
+		console.log(res);
+		if (res.message === 'Not enough balance.') {
+			return toast.error(`${res.message}`, {
+				position: 'bottom-right',
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+			});
+		}
 		navigate('/');
 	};
 	const rejectRequest = async (id, sid) => {
@@ -26,7 +39,6 @@ const JobDetails = ({}) => {
 	};
 	const deleteJobFunc = async () => {
 		const res = await deleteJob(state._id);
-		console.log(res);
 		if (
 			res.message ===
 			'Job cannot be deleted as there is an accepted request.'
@@ -106,7 +118,7 @@ const JobDetails = ({}) => {
 							</p>
 							<p className='text-[12px] text-[black]'>
 								Posted On:
-								<span>{format(state.created_at)}</span>
+								<span> {format(state.createdAt)}</span>
 							</p>
 						</div>
 						<div className='w-[20%] flex items-center justify-center'>

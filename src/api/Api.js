@@ -177,8 +177,14 @@ export const acceptRejectRequests = async (reject, id, sid) => {
 		);
 		return response.data;
 	} else {
-		const response = await axiosClient.patch(`api/job/accept/${id}/${sid}`);
-		return response.data;
+		try {
+			const response = await axiosClient.patch(
+				`api/job/accept/${id}/${sid}`
+			);
+			return response.data;
+		} catch (error) {
+			return error.response.data;
+		}
 	}
 };
 
