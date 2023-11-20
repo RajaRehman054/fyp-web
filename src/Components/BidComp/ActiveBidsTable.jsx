@@ -26,47 +26,55 @@ const ActiveBidsTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((element, index) => (
-          <tr
-            key={index}
-            className="cursor-pointer rounded-xl border-b-[1px] border-[#E4E4E4] bg-white hover:bg-[#EBEBEB]"
-          >
-            <td className="pl-3">
-              <div className="py-2 ">
-                <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-full">
-                  <img
-                    src={
-                      element.video.thumbnail !== null
-                        ? `${HOSTNAME}videos/thumbnails?path=${element.video.thumbnail}`
-                        : UserOne
-                    }
+        {data.length !== 0 ? (
+          data.map((element, index) => (
+            <tr
+              key={index}
+              className="cursor-pointer rounded-xl border-b-[1px] border-[#E4E4E4] bg-white hover:bg-[#EBEBEB]"
+            >
+              <td className="pl-3">
+                <div className="py-2 ">
+                  <div className="flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-full">
+                    <img
+                      src={
+                        element.video.thumbnail !== null
+                          ? `${HOSTNAME}videos/thumbnails?path=${element.video.thumbnail}`
+                          : UserOne
+                      }
+                    />
+                  </div>
+                </div>
+              </td>
+              <td className="font-medium">
+                <p>{element.video.description}</p>
+              </td>
+              <td className="font-medium">
+                <p className="pr-1">{element.amount}</p>
+              </td>
+              <td className="hidden font-medium md:table-cell">
+                <p className="pr-1">{element.current_highest}</p>
+              </td>
+              <td className="font-medium">
+                <p className="pr-1">{format(element.expires)}</p>
+              </td>
+              <td>
+                <div className="justify-center">
+                  <IoTrashOutline
+                    size={19}
+                    color="#48525B"
+                    onClick={() => alert("Delete")}
                   />
                 </div>
-              </div>
-            </td>
-            <td className="font-medium">
-              <p>{element.video.description}</p>
-            </td>
-            <td className="font-medium">
-              <p className="pr-1">{element.amount}</p>
-            </td>
-            <td className="hidden font-medium md:table-cell">
-              <p className="pr-1">{element.current_highest}</p>
-            </td>
-            <td className="font-medium">
-              <p className="pr-1">{format(element.expires)}</p>
-            </td>
-            <td>
-              <div className="justify-center">
-                <IoTrashOutline
-                  size={19}
-                  color="#48525B"
-                  onClick={() => alert("Delete")}
-                />
-              </div>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr className="border-b-[1px] border-[#E4E4E4] ">
+            <td className="font-medium py-2 ">
+              <p className="pl-3">No Bids Record</p>
             </td>
           </tr>
-        ))}
+        )}
       </tbody>
     </table>
   );

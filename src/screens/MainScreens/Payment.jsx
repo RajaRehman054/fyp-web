@@ -61,7 +61,7 @@ const Payment = () => {
             <h1 className="text-[20px] font-bold">Payment History</h1>
           </div>
           {/* payment table*/}
-          {paymentSet.length !== 0 ? (
+          {paymentSet.length === 0 ? (
             <div className="relative my-[22px] flex w-full flex-row h-30 rounded-xl bg-white p-4 shadow-xl">
               <div
                 className=" w-full items-center p-4 rounded-xl relative"

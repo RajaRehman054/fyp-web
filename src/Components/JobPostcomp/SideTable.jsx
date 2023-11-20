@@ -8,7 +8,7 @@ const SideTable = ({ data }) => {
     <div className="my-[22px] flex w-[full]  justify-between overflow-x-auto">
       <table className="w-full table-auto  text-[12px] font-normal text-text  md:text-[14px] ">
         <tbody>
-          {data.map((element, index) => (
+          {data.slice(0, 3).map((element, index) => (
             <tr key={index}>
               <td>
                 <div

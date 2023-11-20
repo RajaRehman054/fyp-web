@@ -4,10 +4,16 @@ import { BiMessageSquareEdit } from "react-icons/bi";
 import UserOne from "../../assets/img1.png";
 import Message from "../../Components/chatComp/Message";
 import Conversation from "../../Components/chatComp/Conversation";
+import StartNewChatModal from "../../Components/chatComp/StartNewChatModal";
 import axiosClient from "../../../axiosClient";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { HOSTNAME } from "../../../Config";
+import { useNavigate } from "react-router-dom";
+
+const handleModal = async () => {
+  document.getElementById("my_modal").showModal();
+};
 
 const Chat = () => {
   const { user } = useSelector((state) => state.user);
@@ -17,6 +23,7 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentChatUser, setCurrentChatUser] = useState("");
+  const navigate = useNavigate();
   const socket = useRef();
   const scrollRef = useRef();
 
@@ -131,7 +138,7 @@ const Chat = () => {
             <h1 className="text-[16px] font-bold p-3 ml-auto text-[black] ">
               {user.username}
             </h1>
-            <span className="cursor-pointer ml-auto mr-3">
+            <span className="cursor-pointer ml-auto mr-3" onClick={handleModal}>
               <BiMessageSquareEdit size={24} color="black" />
             </span>
           </div>
@@ -169,7 +176,14 @@ const Chat = () => {
                     {currentChatUser.username}
                   </h1>
                 </span>
-                <span className="ml-auto cursor-pointer">
+                <span
+                  className="ml-auto cursor-pointer"
+                  onClick={() =>
+                    navigate(`/otherProfile`, {
+                      state: currentChatUser,
+                    })
+                  }
+                >
                   <IoInformationCircleOutline size={24} color="black" />
                 </span>
               </div>
@@ -222,6 +236,8 @@ const Chat = () => {
           )}
         </div>
       </div>
+      {/*Modal */}
+      <StartNewChatModal showmodal={handleModal} user={user} />
     </div>
   );
 };
