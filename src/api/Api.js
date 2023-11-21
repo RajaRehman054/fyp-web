@@ -225,6 +225,14 @@ export const getNotifications = async payload => {
 	}
 };
 
+export const changeNotification = async (payload) => {
+    const response = await axiosClient.patch(
+        `api/notification/setting`,
+        payload
+    );
+    return response.data;
+};
+
 //TODO: search Videos
 export const searchVideosApi = async (type, value) => {
 	const response = await axiosClient.get(
