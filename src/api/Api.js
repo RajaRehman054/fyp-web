@@ -225,12 +225,12 @@ export const getNotifications = async payload => {
 	}
 };
 
-export const changeNotification = async (payload) => {
-    const response = await axiosClient.patch(
-        `api/notification/setting`,
-        payload
-    );
-    return response.data;
+export const changeNotification = async payload => {
+	const response = await axiosClient.patch(
+		`api/notification/setting`,
+		payload
+	);
+	return response.data;
 };
 
 //TODO: search Videos
