@@ -188,7 +188,11 @@ const Chat = () => {
             <h1 className="text-[16px] font-bold p-3 ml-auto text-[black] ">
               {user.username}
             </h1>
-            <span className="cursor-pointer ml-auto mr-3" onClick={handleModal}>
+            <span
+              className="tooltip tooltip-left cursor-pointer ml-auto mr-3"
+              data-tip="Create new message"
+              onClick={handleModal}
+            >
               <BiMessageSquareEdit size={24} color="black" />
             </span>
           </div>
@@ -228,7 +232,8 @@ const Chat = () => {
                   </h1>
                 </span>
                 <span
-                  className="ml-auto cursor-pointer"
+                  className="tooltip tooltip-left ml-auto cursor-pointer"
+                  data-tip="Visit Profile"
                   onClick={() =>
                     navigate(`/otherProfile`, {
                       state: currentChatUser,
