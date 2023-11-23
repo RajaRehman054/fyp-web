@@ -31,6 +31,11 @@ const Login = () => {
 		setContent1Visible(!isContent1Visible);
 	};
 
+	const isValidEmail = input => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return emailRegex.test(input);
+	};
+
 	// Handle Login
 	const handleLogin = async () => {
 		if (username === '' || password === '') {
@@ -78,6 +83,18 @@ const Login = () => {
 			email === ''
 		) {
 			return toast.warn('Please fill all the fields!', {
+				position: 'top-center',
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+			});
+		}
+		if (!isValidEmail(email)) {
+			return toast.warn('Please enter a valid email', {
 				position: 'top-center',
 				autoClose: 5000,
 				hideProgressBar: false,
