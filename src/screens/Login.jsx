@@ -65,9 +65,8 @@ const Login = () => {
 		} else {
 			dispatch(setToken(res.token));
 		}
+		navigate('/', { replace: true });
 		setLoading(false);
-
-		navigate('/');
 	};
 
 	//handle Signup
