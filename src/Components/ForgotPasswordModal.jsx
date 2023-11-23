@@ -11,6 +11,18 @@ const ForgotPasswordModal = ({ handleModal }) => {
 	const [resetPassword, setresetPassword] = useState('');
 
 	const getOtp = async () => {
+		if (email === '') {
+			return toast.error(`Please enter a valid email`, {
+				position: 'top-center',
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+			});
+		}
 		setactiveTab(4);
 		const res = await otpGenerateApi(email);
 		if (res?.status === 404) {
@@ -31,6 +43,18 @@ const ForgotPasswordModal = ({ handleModal }) => {
 
 	const verifyCode = async () => {
 		let payload = { email, otp: pinCode };
+		if (pinCode === '') {
+			return toast.error(`Please enter 4 digit code.`, {
+				position: 'top-center',
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+			});
+		}
 		const res = await verifyOtp(payload);
 		if (res?.message === 'Invalid or Expired token') {
 			return toast.error(`${res.message}`, {
@@ -49,6 +73,18 @@ const ForgotPasswordModal = ({ handleModal }) => {
 
 	const resetPasswordFunction = async () => {
 		let payload = { email, password };
+		if (password === '' && resetPassword == '') {
+			return toast.error(`Please fill all the fields.`, {
+				position: 'top-center',
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+			});
+		}
 		await resetPasswordApi(payload);
 		setactiveTab(0);
 		handleModal(true);

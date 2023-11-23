@@ -54,7 +54,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 	const handleSignOut = async () => {
 		dispatch(clearUser());
 		localStorage.removeItem('jwt');
-		navigate('/login');
+		navigate('/login', { replace: true });
 	};
 
 	return (
