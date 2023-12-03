@@ -161,7 +161,7 @@ const MyProfileVideos = ({ data }) => {
 								/>
 							</div>
 						</div>
-						<p className='font-semibold'>{element.descp}</p>
+						<p className='font-semibold'>{element.description}</p>
 						<p className='font-semibold text-[#FF8216]'>
 							{element.tags}
 						</p>
