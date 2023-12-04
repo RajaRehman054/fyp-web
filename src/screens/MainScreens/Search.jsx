@@ -8,7 +8,7 @@ import UserTwo from '../../assets/noresults.png';
 
 const Search = () => {
 	const [search, setSearch] = useState('');
-	const [selectedType, setSelectedType] = useState('');
+	const [selectedType, setSelectedType] = useState('username');
 	const [videos, setVideos] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [isTyping, setIsTyping] = useState(false);

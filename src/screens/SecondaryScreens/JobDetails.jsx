@@ -3,22 +3,30 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { HOSTNAME } from '../../../Config';
 import { format } from 'timeago.js';
 import { ToastContainer, toast } from 'react-toastify';
-
+import { useSelector } from 'react-redux';
 import Heading from '../../Components/Heading';
 import { acceptRejectRequests, deleteJob, stopRequests } from '../../api/Api';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/userSlice';
+import { getUser } from '../../api/Api';
 
 const JobDetails = ({}) => {
 	let { state } = useLocation();
 	const navigate = useNavigate();
+	const { user } = useSelector(state => state.user);
 	const [receiving, setReceiving] = useState(state.receiving);
+	const dispatch = useDispatch();
+	const fetchUsers = async () => {
+		const data = await getUser();
+		dispatch(setUser(data.user));
+	};
 	const stopRequest = async () => {
 		await stopRequests(state._id);
 		setReceiving(prev => !prev);
 	};
 	const acceptRequest = async (id, sid) => {
 		const res = await acceptRejectRequests(false, id, sid);
-		console.log(res);
 		if (res.message === 'Not enough balance.') {
 			return toast.error(`${res.message}`, {
 				position: 'bottom-right',
@@ -31,6 +39,7 @@ const JobDetails = ({}) => {
 				theme: 'dark',
 			});
 		}
+		await fetchUsers();
 		navigate('/');
 	};
 	const rejectRequest = async (id, sid) => {
