@@ -16,7 +16,8 @@ const contentdetailsModal = props => {
 	};
 
 	const handleBid = async () => {
-		if (user.wallet < amount) {
+		const res = await updateBid(data._id, { amount });
+		if (res?.success2 === false) {
 			handleModal(true);
 			return toast.error(`Not enough balance!`, {
 				position: 'bottom-right',
@@ -29,7 +30,6 @@ const contentdetailsModal = props => {
 				theme: 'dark',
 			});
 		}
-		const res = await updateBid(data._id, { amount });
 		if (res?.success === false) {
 			handleModal(true);
 			return toast.error('Higher bid already placed.', {
